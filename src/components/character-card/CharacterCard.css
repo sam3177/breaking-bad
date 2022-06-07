@@ -1,0 +1,54 @@
+.character-card {
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	border: none;
+}
+
+.character-card:hover {
+	background-color: rgb(239, 239, 239);
+}
+
+.img-wrapper {
+	width: 100%;
+	height: 500px;
+}
+
+.img {
+	object-fit: cover;
+	pointer-events: none;
+	height: 100%;
+	width: 100%;
+}
+
+.card-body > * {
+	pointer-events: none;
+}
+
+.portrayed {
+	font-size: 14px;
+}
+
+.ripple {
+	position: absolute;
+	transition: background-color 0.3s ease;
+	display: block;
+	border-radius: 100px;
+	width: 20px;
+	height: 20px;
+	z-index: 9;
+	animation: 0.5s ease 1 forwards ripple-effect;
+	background-color: rgba(216, 216, 216, 0.3);
+}
+
+@keyframes ripple-effect {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(80);
+	}
+}

@@ -27,15 +27,14 @@ const SearchBar: React.FunctionComponent<Props> = () => {
 		useContext(AppContext);
 
 	return (
-		<div className='mt-5 p-3'>
-			<div className='input-wrapper'>
+		<div className='mt-5 mx-3 p-3 search-bar'>
+			<div className='mr-3 input-wrapper'>
 				<SearchIcon className='search-icon' />
 				<CustomTextField
-        autoFocus
-					className='ms-3 input'
+					autoFocus
+					className='input w-100'
 					label='TextField'
 					variant='outlined'
-					size='small'
 					InputLabelProps={{ shrink: true }}
 					onChange={search}
 				/>
@@ -47,7 +46,6 @@ const SearchBar: React.FunctionComponent<Props> = () => {
 				label='Native select'
 				InputLabelProps={{ shrink: true }}
 				defaultValue={sortMethod}
-				size='small'
 				onChange={onChangeSortMethod}
 				SelectProps={{
 					native: true,

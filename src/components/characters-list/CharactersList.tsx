@@ -1,19 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 import { isEmpty } from "lodash-es";
 
-import { AppContext } from "../../contexts/AppContext";
+import { ApiContext } from "../../contexts/ApiContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import { filterByKeyword, sort } from "../../helpers";
+import { errorImgUrl } from "../../helpers/variables";
+import Loader from "../loader/Loader";
 import CharacterCard, {
 	CharacterInterface,
 } from "../character-card/CharacterCard";
-import Loader from "../loader/Loader";
-import { filterByKeyword, sort } from "../../helpers";
 
 import "./CharactersList.css";
 
 type Props = {};
 
 const CharactersList: React.FunctionComponent<Props> = () => {
-	const { keyword, data, sortMethod } = useContext(AppContext);
+	const { data, isLoadingApi, apiError } = useContext(ApiContext);
+	const { keyword, sortMethod } = useContext(SearchContext);
+
 	const [characters, setCharacters] = useState<CharacterInterface[]>(
 		[],
 	);
@@ -26,8 +31,14 @@ const CharactersList: React.FunctionComponent<Props> = () => {
 
 	return (
 		<ul className='p-3 characters-list'>
-			{isEmpty(data) ? (
+			{isLoadingApi ? (
 				<Loader />
+			) : apiError ? (
+				<img className='w-100' src={errorImgUrl} alt='error img' />
+			) : isEmpty(characters) ? (
+				<Typography variant='h5' className='px-3'>
+					No matches for your search!
+				</Typography>
 			) : (
 				characters.map((character) => (
 					<CharacterCard key={character.char_id} {...character} />

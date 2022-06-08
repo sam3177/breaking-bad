@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { styled, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { AppContext, sortOptions } from "../../contexts/AppContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import { sortOptions } from "../../helpers/variables";
 
 import "./SearchBar.css";
 
@@ -22,9 +23,16 @@ const CustomTextField = styled(TextField)({
 	},
 });
 
+const CustomSelect = styled(CustomTextField)({
+	"& .MuiOutlinedInput-root.Mui-focused": {
+    backgroundColor: "rgb(240,240,240)"
+	},
+});
+
 const SearchBar: React.FunctionComponent<Props> = () => {
+
 	const { search, sortMethod, onChangeSortMethod } =
-		useContext(AppContext);
+		useContext(SearchContext);
 
 	return (
 		<div className='mt-5 mx-3 p-3 search-bar'>
@@ -39,7 +47,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
 					onChange={search}
 				/>
 			</div>
-			<CustomTextField
+			<CustomSelect
 				className='ms-3 input'
 				id='outlined-select-currency-native'
 				select
@@ -55,7 +63,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
 						{label}
 					</option>
 				))}
-			</CustomTextField>
+			</CustomSelect>
 		</div>
 	);
 };

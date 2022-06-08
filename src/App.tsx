@@ -1,19 +1,22 @@
 import React from "react";
 
-import "./App.css";
-
 import CharactersList from "./components/characters-list/CharactersList";
-import { Provider } from "./contexts/AppContext";
+import { ApiProvider } from "./contexts/ApiContext";
+import { SearchProvider } from "./contexts/SearchContext";
 import SearchBar from "./components/search-bar/SearchBar";
+
+import "./App.css";
 
 function App() {
 	return (
-		<Provider>
-			<div className='App'>
-				<SearchBar />
-				<CharactersList />
-			</div>
-		</Provider>
+		<ApiProvider>
+			<SearchProvider>
+				<div className='app'>
+					<SearchBar />
+					<CharactersList />
+				</div>
+			</SearchProvider>
+		</ApiProvider>
 	);
 }
 
